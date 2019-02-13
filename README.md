@@ -2,6 +2,8 @@
 
 #### **von Johannes Hoppe**
 
+[![Join the chat at https://gitter.im/2019-02-angular-workshop-erlangen/community](https://badges.gitter.im/2019-02-angular-workshop-erlangen/community.svg)](https://gitter.im/2019-02-angular-workshop-erlangen/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 <hr>
 
 **Schön, dass Du dabei bist!**  
