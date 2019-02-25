@@ -1,2 +1,13 @@
-{{ books }}
+<!-- <br-book
+  *ngFor="let b of books"
+  [book]="b"></br-book> -->
 
+
+<ng-container *ngFor="let b of books; index as i">
+  {{ i + 1 }}.
+
+  <br-book
+    (click)="b.title = 'bis morgen 08:30 Uhr! ;-)'  "
+    [book]="b"></br-book>
+
+</ng-container>
