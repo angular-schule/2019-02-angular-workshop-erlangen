@@ -4,11 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "execute": "node index.js",
+    "start": "npm run build && npm run execute"
   },
   "author": "npm init",
   "license": "ISC",
-  "dependencies": {
-    "typescript": "^3.3.3333"
+  "dependencies": {},
+  "devDependencies": {
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.3333",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   }
 }
