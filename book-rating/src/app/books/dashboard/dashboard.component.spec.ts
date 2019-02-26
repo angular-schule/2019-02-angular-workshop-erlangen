@@ -1,6 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DashboardComponent } from './dashboard.component';
+import { Component, Input } from '@angular/core';
+import { Book } from '../shared/book';
+
+@Component({
+  selector: 'br-book',
+  template: ':-)'
+})
+export class TestBookComponent {
+  @Input() book: Book;
+  @Input() maxRating: number;
+  @Input() minRating: number;
+}
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -8,7 +20,10 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ]
+      declarations: [
+        DashboardComponent,
+        TestBookComponent
+      ]
     })
     .compileComponents();
   }));
