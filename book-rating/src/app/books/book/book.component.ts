@@ -10,6 +10,8 @@ import { Book } from '../shared/book';
 export class BookComponent {
 
   @Input()  book: Book;
+  @Input()  maxRating: number;
+  @Input()  minRating: number;
 
   @Output() rateUp = new EventEmitter<Book>();
   @Output() rateDown = new EventEmitter<Book>();

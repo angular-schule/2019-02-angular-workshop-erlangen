@@ -6,8 +6,8 @@ import { Book } from './book';
 })
 export class BookRatingService {
 
-  private minRating = 1;
-  private maxRating = 5;
+  readonly minRating = 1;
+  readonly maxRating = 5;
 
   rateUp(book: Book) {
     return {
