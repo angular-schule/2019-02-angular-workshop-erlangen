@@ -1,15 +1,7 @@
 <br-book
   *ngFor="let b of books"
-  [book]="b"></br-book>
+  [book]="b"
 
-<!--
-<div
-  *ngFor="let b of books; index as i; even as e"
-  [ngClass]="{ 'bg-gray': e }">
-  {{ i + 1 }}.
-
-  <br-book
-    (click)="b.title = 'bis morgen 08:30 Uhr! ;-)'  "
-    [book]="b"></br-book>
-
-</div> -->
+  (rateDown)="doRateDown($event)"
+  (rateUp)="doRateUp($event)"
+  ></br-book>

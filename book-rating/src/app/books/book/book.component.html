@@ -11,8 +11,8 @@
     </div>
     <p>{{ book.description }}</p>
 
-    <button class="btn btn-secondary mr-2"> - </button>
-    <button class="btn btn-primary"> + </button>
+    <button (click)="doRateDown()" class="btn btn-secondary mr-2"> - </button>
+    <button (click)="doRateUp()" class="btn btn-primary"> + </button>
 
   </div>
 </div>

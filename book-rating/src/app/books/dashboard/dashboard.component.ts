@@ -12,7 +12,6 @@ export class DashboardComponent implements OnInit {
   books: Book[];
 
   constructor(private rs: BookRatingService) {
-
   }
 
   ngOnInit() {
@@ -33,5 +32,23 @@ export class DashboardComponent implements OnInit {
         description: 'machen wir nicht',
         rating: 2
       }];
+  }
+
+  doRateDown(book: Book) {
+    const ratedBook = this.rs.rateDown(book);
+    this.updateList(ratedBook);
+  }
+
+  doRateUp(book: Book) {
+    const ratedBook = this.rs.rateUp(book);
+    this.updateList(ratedBook);
+
+  }
+
+  updateList(ratedBook: Book) {
+    this.books = this.books
+      .map(b => b.isbn === ratedBook.isbn ? ratedBook : b)
+      .sort((a, b) => b.rating - a.rating);
+
   }
 }
