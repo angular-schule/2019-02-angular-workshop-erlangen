@@ -5,7 +5,7 @@
         src="//api.angular.schule/avatar/{{ book.rating }}">
     <div class="card-title">
       <h2>
-        {{ book.title }}
+        {{ book.title | uppercase }} ({{ book.price | currency: 'EUR' }})
         <!-- <span class="badge badge-secondary">{{ book.rating }}</span> -->
         <span *brRating="book.rating">⭐️</span>
         <!-- <span *ngFor="let i of [].constructor(book.rating)">⭐️</span> -->
