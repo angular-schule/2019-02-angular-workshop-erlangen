@@ -11,7 +11,6 @@ describe('Angular Buch', () => {
       browser.get('https://www.dpunkt.de/buecher/12400/9783864903571-angular.html');
       const heading = $('h1');
       expect(heading.getText()).toEqual('Angular');
-      browser.sleep(4000);
   });
 
   afterAll(() => {
