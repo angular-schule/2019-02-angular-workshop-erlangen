@@ -19,7 +19,11 @@
 
     <button
       [disabled]="book.rating >= maxRating"
-      (click)="doRateUp()" class="btn btn-primary"> + </button>
+      (click)="doRateUp()" class="btn btn-primary mr-2"> + </button>
+
+    <a class="btn btn-secondary"
+      [routerLink]="['/book', book.isbn]"
+      >Details</a>
 
   </div>
 </div>
