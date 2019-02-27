@@ -3,7 +3,7 @@ import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
 import { BookStoreService } from '../shared/book-store.service';
 import { Subscription } from 'rxjs';
-import { take, t } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 
 @Component({
@@ -11,24 +11,15 @@ import { take, t } from 'rxjs/operators';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
 
   books: Book[];
 
   constructor(public rs: BookRatingService, private bs: BookStoreService) {
   }
 
-  // according to the docs, this is never an antipattern
-  subscription: Subscription;
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
   ngOnInit() {
-    // this.subscription = this.bs.getAll().subscribe(books => this.books = books);
-
-    this.subscription = this.bs.getAll()
-      .pipe(take(1))
+    this.bs.getAll()
       .subscribe(books => this.books = books);
   }
 
