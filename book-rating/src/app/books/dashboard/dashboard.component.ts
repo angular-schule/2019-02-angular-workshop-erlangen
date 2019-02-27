@@ -1,40 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
+import { BookStoreService } from '../shared/book-store.service';
+import { Subscription } from 'rxjs';
+import { take, t } from 'rxjs/operators';
+
 
 @Component({
   selector: 'br-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   books: Book[];
 
-  constructor(public rs: BookRatingService) {
+  constructor(public rs: BookRatingService, private bs: BookStoreService) {
+  }
+
+  // according to the docs, this is never an antipattern
+  subscription: Subscription;
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   ngOnInit() {
-    this.books =  [
-      {
-        isbn: '000',
-        title: 'Angular',
-        description: 'super Buch',
-        rating: 5,
-        price: 34.99
-      }, {
-        isbn: '111',
-        title: 'AngularJS',
-        description: 'tolles Buch',
-        rating: 3,
-        price: 10
-      }, {
-        isbn: '222',
-        title: 'React',
-        description: 'machen wir nicht',
-        rating: 2,
-        price: 1
-      }];
+    // this.subscription = this.bs.getAll().subscribe(books => this.books = books);
+
+    this.subscription = this.bs.getAll()
+      .pipe(take(1))
+      .subscribe(books => this.books = books);
   }
 
   doRateDown(book: Book) {
