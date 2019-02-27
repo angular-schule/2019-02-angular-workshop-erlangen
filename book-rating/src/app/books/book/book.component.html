@@ -6,7 +6,9 @@
     <div class="card-title">
       <h2>
         {{ book.title }}
-        <span class="badge badge-secondary">{{ book.rating }}</span>
+        <!-- <span class="badge badge-secondary">{{ book.rating }}</span> -->
+        <span *brRating="book.rating">⭐️</span>
+        <!-- <span *ngFor="let i of [].constructor(book.rating)">⭐️</span> -->
       </h2>
     </div>
     <p>{{ book.description }}</p>
