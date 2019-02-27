@@ -38,10 +38,7 @@ export class CreateBookComponent {
       price: 10
     };
 
-    // TODO:
-    // 1. event feuern
-    // 2. event im Dashboard empfangen
-    // 3. buch zum books-array hinzufügen
-    // 4. form resetten
+    this.created.emit(newBook);
+    this.bookForm.reset();
   }
 }
