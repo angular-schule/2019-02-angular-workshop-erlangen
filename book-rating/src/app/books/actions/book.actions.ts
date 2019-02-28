@@ -1,4 +1,6 @@
 import { Action } from '@ngrx/store';
+import { Book } from '../shared/book';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export enum BookActionTypes {
   LoadBooks = '[Book] Load Books',
@@ -12,13 +14,20 @@ export class LoadBooks implements Action {
 
 export class LoadBooksSuccess implements Action {
   readonly type = BookActionTypes.LoadBooksSuccess;
-  constructor(public payload: { data: any }) { }
+  constructor(public payload: { books: Book[] }) { }
+
+  // nicht verwenden:
+  // constructor(public payload: Book[]) { }
+  // constructor(public books: Book[]) { }
 }
 
 export class LoadBooksFailure implements Action {
   readonly type = BookActionTypes.LoadBooksFailure;
-  constructor(public payload: { error: any }) { }
+  constructor(public payload: { error: HttpErrorResponse }) { }
 }
 
-export type BookActions = LoadBooks | LoadBooksSuccess | LoadBooksFailure;
+export type BookActions =
+  | LoadBooks
+  | LoadBooksSuccess
+  | LoadBooksFailure;
 
