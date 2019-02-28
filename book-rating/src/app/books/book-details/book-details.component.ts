@@ -22,8 +22,8 @@ export class BookDetailsComponent implements OnInit {
     this.book$ = this.route.paramMap
       .pipe(
         map(params => params.get('isbn')),
-        switchMap(isbn => this.bs.getSingle(isbn)),
-        share() // cold to hot
+        tap(e => console.log(e)),
+        switchMap(isbn => this.bs.getSingle(isbn))
       );
   }
 
