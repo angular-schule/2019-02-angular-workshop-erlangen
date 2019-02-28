@@ -1,7 +1,7 @@
-<h1>{{ book?.isbn }}</h1>
+<h1>{{ (book$ | async)?.isbn }}</h1>
 
 <p>
-  {{ book?.description }}
+  {{ (book$ | async)?.description }}
 </p>
 
 <a routerLink="/book/222">Go to 222</a><br>
