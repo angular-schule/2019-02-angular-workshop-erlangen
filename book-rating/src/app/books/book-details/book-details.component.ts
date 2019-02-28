@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { of, from } from 'rxjs';
+import { map, filter, tap, reduce, scan } from 'rxjs/operators';
+import { of, from, Observable } from 'rxjs';
 
 
 @Component({
@@ -25,13 +25,33 @@ export class BookDetailsComponent implements OnInit {
       ////////////
       // import { of, from } from 'rxjs';
 
-      // Callbacks
-      from([1, 2, 3])
-        .subscribe(
-          e => console.log(e),
-          e => console.error(e),
-          () => console.log('Complete')
-        );
+      const observer = {
+        next: e => console.log(e),
+        error: e => console.error(e),
+        complete: () => console.log('Complete')
+      };
+
+      const myObservable$ = new Observable<number>(subscriber => {
+        subscriber.next(1);
+        subscriber.next(2);
+        subscriber.next(3);
+
+        setTimeout(() => subscriber.next(4), 1000);
+        setTimeout(() => subscriber.next(5), 2000);
+
+        setTimeout(() => subscriber.complete(), 2000);
+      });
+
+      // Subscription: Vertrag zw. Observer und Observable
+      const subscription = myObservable$
+        .pipe(
+          map(x => x * 10),
+          filter(x => x > 20),
+          scan((acc, item) => acc + item, 0)
+        )
+        .subscribe(observer);
+
+      setTimeout(() => subscription.unsubscribe(), 2000);
 
 
   }
