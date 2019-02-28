@@ -1,8 +1,13 @@
 <!-- book.component.html -->
 <div class="card mb-4">
   <div class="card-body bg-light">
-      <img class="img-thumbnail float-right"
-        src="//api.angular.schule/avatar/{{ book.rating }}">
+    <img
+      *ngFor="let t of book.thumbnails"
+      class="img-thumbnail float-right ml-2"
+      [src]="t.url"
+      [title]="t.title"
+      width="200">
+
     <div class="card-title">
       <h2>
         {{ book.title | uppercase }} ({{ book.price | currency: 'EUR' }})
