@@ -8,7 +8,8 @@ import {
 import { environment } from '../../environments/environment';
 
 export interface State {
-
+  // book: fromBook.State
+  // router
 }
 
 export const reducers: ActionReducerMap<State> = {

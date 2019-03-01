@@ -1,19 +1,22 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
 import { BookStoreService } from '../shared/book-store.service';
 import { State } from 'src/app/reducers';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { LoadBooks } from '../actions/book.actions';
+import { getBooksLoading, getAllBooks } from '../selectors/book.selectors';
 
 @Component({
   selector: 'br-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardComponent implements OnInit {
 
-  books: Book[];
+  loading$ = this.store.pipe(select(getBooksLoading));
+  books$ = this.store.pipe(select(getAllBooks));
 
   constructor(
     public rs: BookRatingService,
