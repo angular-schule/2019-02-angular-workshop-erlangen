@@ -1,4 +1,4 @@
-<ng-container *ngIf="book$ | async as book; else loading">
+<ng-container *ngIf="book$ | async as book;">
 
   <h1>{{ book.title }}<br>
     <small>{{ book.isbn }}</small>
@@ -10,9 +10,10 @@
 
 </ng-container>
 
-<ng-template #loading>
-  <h2>Buch wird geladen...</h2>
-</ng-template>
+<div *ngIf="loading$ | async">
+  Buch wird geladen...
+</div>
+
 
 <a routerLink="/book/222">Go to 222</a><br>
 <a routerLink="/book/333">Go to 333</a>

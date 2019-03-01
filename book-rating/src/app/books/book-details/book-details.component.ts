@@ -8,7 +8,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { State } from 'src/app/reducers';
 import { Store, select } from '@ngrx/store';
 import { LoadBook } from '../actions/book.actions';
-import { getBookByIsbn } from '../selectors/book.selectors';
+import { getBookByIsbn, getBooksLoading } from '../selectors/book.selectors';
+import { getAllBooks } from '../selectors/book.selectors';
+
 
 
 @Component({
@@ -19,9 +21,9 @@ import { getBookByIsbn } from '../selectors/book.selectors';
 export class BookDetailsComponent implements OnInit {
 
   book$: Observable<Book>;
+  loading$ = this.store.pipe(select(getBooksLoading));
 
   constructor(private route: ActivatedRoute,
-    private bs: BookStoreService,
     private store: Store<State>) { }
 
   ngOnInit() {
@@ -41,5 +43,4 @@ export class BookDetailsComponent implements OnInit {
           select(getBookByIsbn, {isbn}))),
       );
   }
-
 }
