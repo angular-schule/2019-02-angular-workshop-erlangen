@@ -19,6 +19,9 @@
       "dom"
     ],
     "paths": {
+      "plotly.js": [
+        "node_modules/plotly.js-basic-dist"
+      ],
       "my-lib": [
         "dist/my-lib"
       ],
