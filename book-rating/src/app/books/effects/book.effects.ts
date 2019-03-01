@@ -10,16 +10,6 @@ import { BookStoreService } from '../shared/book-store.service';
 @Injectable()
 export class BookEffects {
 
-  /*
-  @Effect()
-  loadBooks$ = this.actions$.pipe(
-    ofType(BookActionTypes.LoadBooks),
-    concatMap(() => EMPTY.pipe(
-      map(data => new LoadBooksSuccess({ data })),
-      catchError(error => of(new LoadBooksFailure({ error }))))
-    )
-  */
-
   @Effect()
   loadBooks$ = this.actions$.pipe(
     ofType(BookActionTypes.LoadBooks),
@@ -28,6 +18,8 @@ export class BookEffects {
       catchError(error => of(new LoadBooksFailure({ error })))
     ))
   );
+
+  // TODO: LoadBook --> LoadBookSuccess ODER LoadBookFailure
 
 
   constructor(

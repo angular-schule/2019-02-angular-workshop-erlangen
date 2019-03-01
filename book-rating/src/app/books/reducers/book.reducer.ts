@@ -13,9 +13,18 @@ export const initialState: State = {
 };
 
 export function reducer(state = initialState, action: BookActions): State {
+
+  /*
+  // Pattern: chaining reducers
+  const state1 = reducer1(state, action);
+  const state2 = reducer2(state1, action);
+  return state2;
+  */
+
   switch (action.type) {
 
-    case BookActionTypes.LoadBooks: {
+    case BookActionTypes.LoadBooks:
+    case BookActionTypes.LoadBook:  {
       return {
         ...state,
         loading: true
@@ -31,13 +40,29 @@ export function reducer(state = initialState, action: BookActions): State {
       };
     }
 
-    case BookActionTypes.LoadBooksFailure: {
+    case BookActionTypes.LoadBookSuccess: {
+      const { book } = action.payload;
+      const books = [
+        ...state.books.filter(b => b.isbn !== book.isbn),
+        book
+      ];
+
+      return {
+        ...state,
+        books,
+        loading: false
+      };
+    }
+
+    case BookActionTypes.LoadBooksFailure:
+    case BookActionTypes.LoadBookFailure: {
       return {
         ...state,
         books: [],
         loading: false
       };
     }
+
     default:
       return state;
   }
