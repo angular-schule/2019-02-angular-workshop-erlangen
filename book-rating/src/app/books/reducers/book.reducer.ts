@@ -1,18 +1,22 @@
 
 import { BookActions, BookActionTypes } from '../actions/book.actions';
 import { Book } from '../shared/book';
+import { ConfigActions, ConfigActionTypes } from 'src/app/actions/config.actions';
 
 export interface State {
   books: Book[];
   loading: boolean;
+
+  isAdmin: boolean;
 }
 
 export const initialState: State = {
   books: [],
-  loading: false
+  loading: false,
+  isAdmin: false
 };
 
-export function reducer(state = initialState, action: BookActions): State {
+export function reducer(state = initialState, action: BookActions | ConfigActions): State {
 
   /*
   // Pattern: chaining reducers
@@ -22,6 +26,13 @@ export function reducer(state = initialState, action: BookActions): State {
   */
 
   switch (action.type) {
+
+    case ConfigActionTypes.ChangeConfig: {
+      return {
+        ...state,
+        isAdmin: action.payload.config.isAdmin
+      };
+    }
 
     case BookActionTypes.LoadBooks:
     case BookActionTypes.LoadBook:  {
