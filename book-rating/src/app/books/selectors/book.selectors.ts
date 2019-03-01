@@ -13,3 +13,16 @@ export const getAllBooks = createSelector(
   bookState => bookState.books
 );
 
+// Parametrized Selector
+export const getBookByIsbn = createSelector(
+  getAllBooks,
+  (books, props) => books.find(b => b.isbn === props.isbn)
+);
+
+/*
+// breaks earlier
+export const getBookByIsbn2 = createSelector(
+  getBookState,
+  (bookState, props) => bookState.books.find(b => b.isbn === props.isbn)
+);
+*/

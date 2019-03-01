@@ -5,6 +5,10 @@ import { of, from, Observable, EMPTY } from 'rxjs';
 import { BookStoreService } from '../shared/book-store.service';
 import { Book } from '../shared/book';
 import { HttpErrorResponse } from '@angular/common/http';
+import { State } from 'src/app/reducers';
+import { Store, select } from '@ngrx/store';
+import { LoadBook } from '../actions/book.actions';
+import { getBookByIsbn } from '../selectors/book.selectors';
 
 
 @Component({
@@ -16,14 +20,25 @@ export class BookDetailsComponent implements OnInit {
 
   book$: Observable<Book>;
 
-  constructor(private route: ActivatedRoute, private bs: BookStoreService) { }
+  constructor(private route: ActivatedRoute,
+    private bs: BookStoreService,
+    private store: Store<State>) { }
 
   ngOnInit() {
-    this.book$ = this.route.paramMap
+
+    const getIsbn$ = this.route.paramMap
       .pipe(
-        map(params => params.get('isbn')),
-        tap(e => console.log(e)),
-        switchMap(isbn => this.bs.getSingle(isbn))
+        map(params => params.get('isbn'))
+      );
+
+    getIsbn$.pipe(
+        map(isbn => new LoadBook({ isbn }))
+      ).subscribe(this.store);
+
+    this.book$ = getIsbn$
+      .pipe(
+        switchMap(isbn => this.store.pipe(
+          select(getBookByIsbn, {isbn}))),
       );
   }
 
